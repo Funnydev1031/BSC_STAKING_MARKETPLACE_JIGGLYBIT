@@ -64,7 +64,7 @@ export const InputBNB = ({bnbAmount, setBnbAmount}) => {
             textAlign: 'right'
           }
         }}
-        placeholder={bnbAmount}
+        placeholder={bnbAmount + ''}
         // value={bnbAmount}
         onChange={(e) => setBnbAmount(e.target.value)}
       />

@@ -13,10 +13,12 @@ export const getContract = () => {
   return contract;
 };
 
-export const getSigner = () => {
+export const getWalletBalance = async (walletAddress) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  return signer;
+
+  const balance = await provider.getBalance(walletAddress)
+  const balanceInEth = ethers.utils.formatEther(balance)
+  return parseFloat(balanceInEth).toFixed(4)
 };
 
 export const connectWallet = async () => {

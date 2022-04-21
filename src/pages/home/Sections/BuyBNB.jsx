@@ -4,7 +4,7 @@ import { CardContainer, CardItem, ButtonFirst, ButtonSecond, InputBNB } from '..
 import { getContract, getSigner } from "../../util/commonFunc";
 import {ethers} from 'ethers'
 
-const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBalance,yourProfit,yourStrippers}) => {
+const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBalance, walletBalance, yourProfit,yourStrippers}) => {
   const [bnbAmount, setBnbAmount] = useState(0)
   
 
@@ -27,8 +27,8 @@ const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBal
   const hireStrippers = async () => {
     const contract = getContract();
     try {
-      let walletAddress = getSigner();
-      let tx = await contract.BuryGold(walletAddress);
+      // let walletAddress = getSigner();
+      // let tx = await contract.BuryGold(walletAddress);
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +52,7 @@ const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBal
       </CardItem>
       <CardItem>
         <Typography variant='body1' color='txtTitle'> Wallet </Typography>
-        <Typography variant='h6' color='txtFirst'> 0 BNB </Typography>
+        <Typography variant='h6' color='txtFirst'> {walletBalance} BNB </Typography>
       </CardItem>
       <CardItem>
         <Typography variant='body1' color='txtTitle'> Your Strippers </Typography>

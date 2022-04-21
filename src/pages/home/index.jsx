@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import LogoImg from '../../assets/images/logo.png';
 import { Stack, Typography, Paper, Box, Button } from '@mui/material';
 
-import { CardContainer, CardItem } from '../../components';
 import SectionBuyBNB from './Sections/BuyBNB';
 import SectionInfoSection from './Sections/InfoSection';
 import SectionRefer from './Sections/Refer';
 import SectionHowItWorks from './Sections/HowItWorks';
-import { connectWallet, getContract } from '../util/commonFunc';
+import { connectWallet, getContract, getWalletBalance } from '../util/commonFunc';
 
 const HomePage = () => {
   const [walletAddress, setWalletAddress] = useState('')
   const [contractBalance, setContractBalance] = useState(0)
+  const [walletBalance, setWalletBalance] = useState(0)
   const [yourProfit, setYourProfit] = useState(0)
   const [yourStrippers, setYourStrippers] = useState(0)
   const [contract, setContract] = useState(undefined)
@@ -22,12 +22,11 @@ const HomePage = () => {
       if(contract)
       {
         setContractBalance(parseFloat(ethers.utils.formatUnits(await contract.getBalance())).toFixed(4))
+        setWalletBalance(await getWalletBalance(walletAddress))
         setYourProfit(parseFloat(ethers.utils.formatUnits(await contract.striperRewards(walletAddress))).toFixed(4))
         const res1 = ethers.utils.formatUnits(await contract.striperRewards(walletAddress))
-        const res2 = ethers.utils.formatUnits(await contract.getMyStripers(walletAddress))
-        console.log('res1', res1)
-        console.log('res2', res2)
-        setYourStrippers(parseFloat(ethers.utils.formatUnits(await contract.getMyStripers(walletAddress))).toFixed(4))
+        const res2 = ethers.utils.formatUnits(await contract.getMyMiners(walletAddress))
+        setYourStrippers(parseFloat(await contract.getMyStripers(walletAddress)))
       }
   }, [contract, contractBalance])
   
@@ -36,7 +35,6 @@ const HomePage = () => {
     setWalletAddress(connectResponse.address)
     if(connectResponse.address){
       const cont = getContract()
-      console.log('cont', cont)
       setContract(cont)
     } 
   }
@@ -105,6 +103,7 @@ const HomePage = () => {
       contract={contract} 
       contractBalance={contractBalance} 
       setContractBalance={setContractBalance} 
+      walletBalance={walletBalance}
       yourProfit={yourProfit}
       yourStrippers={yourStrippers}/>
       <SectionInfoSection />
