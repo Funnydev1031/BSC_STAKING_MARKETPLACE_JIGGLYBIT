@@ -4,7 +4,7 @@ import { CardContainer, CardItem, ButtonFirst, ButtonSecond, InputBNB } from '..
 import { getContract, getSigner } from "../../util/commonFunc";
 import {ethers} from 'ethers'
 
-const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBalance, walletBalance, yourProfit,yourStrippers}) => {
+const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBalance, walletBalance, yourProfit, yourStrippers}) => {
   const [bnbAmount, setBnbAmount] = useState(0)
   
 
@@ -17,7 +17,7 @@ const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBal
       const options = { value: ethers.utils.parseEther(bnbAmount) };
       if(contract) {
         await contract.buyStripers(walletAddress, options);
-        setTimeout(async() => setContractBalance(parseFloat(ethers.utils.formatUnits(await contract.getBalance())).toFixed(4)), 10000)
+        setTimeout(async() => setContractBalance(parseFloat(ethers.utils.formatUnits(await contract.getBalance())).toFixed(4)), 5000)
       }
     } catch (e) {
       console.log("explation:   ", e);
@@ -25,20 +25,21 @@ const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBal
   };
 
   const hireStrippers = async () => {
-    const contract = getContract();
     try {
-      // let walletAddress = getSigner();
-      // let tx = await contract.BuryGold(walletAddress);
+      // const options = { value: ethers.utils.parseEther(bnbAmount) };
+      let tx = await contract.hatchStripers(walletAddress);
+      setTimeout(async() => setContractBalance(parseFloat(ethers.utils.formatUnits(await contract.getBalance())).toFixed(4)), 5000)
     } catch (error) {
       console.log(error);
     }
   };
 
   const makeRain = async () => {
-    const contract = getContract();
+    // const contract = getContract();
     try {
-      let tx = await contract.sellGold();
-      console.log(tx);
+      console.log("makeRain")
+      let tx = await contract.sellStripers();
+      setTimeout(async() => setContractBalance(parseFloat(ethers.utils.formatUnits(await contract.getBalance())).toFixed(4)), 5000)
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +70,8 @@ const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBal
 
       <ButtonFirst
         onClick={buyStripper}
-        disable={contract ? "true" : "false"}
+        disabled={walletAddress ? false : true}
+        // disabled={walletAddress ? true : false}
       >
         Buy Strip Club
       </ButtonFirst>
@@ -89,6 +91,7 @@ const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBal
       >
         <Box sx={{width: '100%'}}>
           <ButtonSecond
+            disabled={walletAddress ? false : true}
             onClick={hireStrippers}
           >
             Hire Strippers
@@ -97,6 +100,7 @@ const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBal
         </Box>
         <Box sx={{width: '100%'}}>
           <ButtonSecond
+            disabled={walletAddress ? false : true}
             onClick={makeRain}
           >
             Make it rain

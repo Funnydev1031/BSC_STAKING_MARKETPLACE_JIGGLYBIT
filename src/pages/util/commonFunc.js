@@ -20,6 +20,19 @@ export const getWalletBalance = async (walletAddress) => {
   const balanceInEth = ethers.utils.formatEther(balance)
   return parseFloat(balanceInEth).toFixed(4)
 };
+// export const contractBalance =async()=>{
+//   const provider = new ethers.providers.Web3Provider(window.ethereum);
+//   provider.on('block', () => {
+//     provider.getBalance(process.env.REACT_APP_ADDRESS).then((balance) => {
+//         if (!balance.eq(lastBalance)) {
+//         lastBalance = balance
+//         // convert a currency unit from wei to ether
+//         const balanceInEth = ethers.utils.formatEther(balance)
+//         console.log(`balance: ${balanceInEth} ETH`)
+//         }
+//     })
+//   })
+// }
 
 export const connectWallet = async () => {
   const chainId = process.env.REACT_APP_CHAIN_ID;

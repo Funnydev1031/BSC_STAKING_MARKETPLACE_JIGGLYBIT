@@ -23,12 +23,13 @@ const HomePage = () => {
   useEffect(async () => {
       if(contract)
       {
+        console.log('start')
         setContractBalance(parseFloat(ethers.utils.formatUnits(await contract.getBalance())).toFixed(4))
         setWalletBalance(await getWalletBalance(walletAddress))
         setYourProfit(parseFloat(ethers.utils.formatUnits(await contract.striperRewards(walletAddress))).toFixed(4))
-        const res1 = ethers.utils.formatUnits(await contract.striperRewards(walletAddress))
-        const res2 = ethers.utils.formatUnits(await contract.getMyMiners(walletAddress))
-        setYourStrippers(parseFloat(await contract.getMyStripers(walletAddress)))
+        setYourStrippers(parseFloat(await contract.getMyMiners(walletAddress)))
+        setReferUrl('striperApp/'+walletAddress)
+        console.log('end')
       }
   }, [contract, contractBalance])
   

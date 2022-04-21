@@ -64,7 +64,7 @@ export const InputBNB = ({bnbAmount, setBnbAmount}) => {
             textAlign: 'right'
           }
         }}
-        placeholder={bnbAmount}
+        placeholder={bnbAmount+''}
         // value={bnbAmount}
         onChange={(e) => setBnbAmount(e.target.value)}
       />
@@ -83,7 +83,7 @@ export const InputBNB = ({bnbAmount, setBnbAmount}) => {
   )
 }
 
-export const InputLink = ({children}) => {
+export const InputLink = ({referUrl}) => {
   return (
     <Box
       mb={3}
@@ -99,8 +99,13 @@ export const InputLink = ({children}) => {
         alignItems: 'center'
       }}
     >
-      <Typography variant='body2'>
-        {children}
+      <Typography variant='body2' sx={{
+        paddingX:'1rem'
+      }} noWrap
+      >
+        {console.log('ddddd', referUrl)}
+        {
+        referUrl}
       </Typography>
     </Box>
   )
