@@ -64,7 +64,7 @@ export const InputBNB = ({bnbAmount, setBnbAmount}) => {
             textAlign: 'right'
           }
         }}
-        placeholder={bnbAmount + ''}
+        placeholder={bnbAmount}
         // value={bnbAmount}
         onChange={(e) => setBnbAmount(e.target.value)}
       />
@@ -102,6 +102,14 @@ export const InputLink = ({children}) => {
       <Typography variant='body2'>
         {children}
       </Typography>
+    </Box>
+  )
+}
+
+export const SocialButtonIcon = ({children}) => {
+  return (
+    <Box>
+      {children}
     </Box>
   )
 }

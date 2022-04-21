@@ -73,9 +73,9 @@ const SectionBuyBNB = ({walletAddress, contract, contractBalance, setContractBal
       >
         Buy Strip Club
       </ButtonFirst>
-      {/* <Typography variant='body2' textAlign='center' mt='6px'> */}
-        {/* Deposit */}
-      {/* </Typography> */}
+      {/* <Typography variant='body2' textAlign='center' mt='6px'>
+        Deposit
+      </Typography> */}
 
       <Divider sx={{ mt: 2, mb: 3 }} />
 
